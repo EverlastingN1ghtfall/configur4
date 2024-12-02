@@ -1,5 +1,4 @@
-import xml.etree.ElementTree
-from xml.etree.ElementTree import ElementTree
+from lxml import etree
 
 
 class Solution:
@@ -67,9 +66,10 @@ class Solution:
         return int(fixed_zeroes, 2).to_bytes(6)
 
     def log_dump(self):
-        with open(self.log_file, 'r') as f:
-            exporter = ElementTree()
-            exporter.write(self.log_file, 'utf-8')
+        with open(self.log_file, 'w') as f:
+            ET = etree.Element(self.log[0])
+            etree.dump(ET)
+            f.write()
 
     def main(self):
         with open(self.input_file, 'r') as f:
@@ -130,6 +130,8 @@ class Solution:
                 address_mult2 = self.namespace[mult2]
                 binary = self.mult_handler(32, address, address_mult2, address_mult1)
                 self.output_binary(binary)
+
+        self.log_dump()
 
 
 if __name__ == "__main__":
