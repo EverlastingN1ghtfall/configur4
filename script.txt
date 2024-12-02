@@ -1,0 +1,4 @@
+const a0 210
+move b0 a0 10
+write b0 c0
+mult d0 b0 c0

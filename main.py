@@ -11,6 +11,8 @@ class Solution:
         self.free_address: int = -1
         self.logs: list = []
 
+        self.main()
+
     def paginate(self, num: int, length: int) -> str:
         return "0" * (length - len(bin(num)[2:])) + bin(num)[2:]
 
@@ -81,8 +83,7 @@ class Solution:
                 else:
                     address_to = self.namespace[var]
 
-                address = self.add_var_to_namespace(var)
-                binary = self.constant_handler(36, address, int(value))
+                binary = self.constant_handler(36, address_to, int(value))
                 self.output_binary(binary)
 
             elif line.startswith("move"):
@@ -96,7 +97,7 @@ class Solution:
                     address_to = self.namespace[TO]
 
                 address_from = self.namespace[FROM]
-                binary = self.read_handler(58, address_to, address_from, shift)
+                binary = self.read_handler(58, address_to, address_from, int(shift))
                 self.output_binary(binary)
 
             elif line.startswith("write"):
@@ -132,4 +133,8 @@ class Solution:
 
 
 if __name__ == "__main__":
-    sol = Solution()
+    program_file = "script.txt"
+    bin_output = "assembler.bin"
+    log_file = "logs.xml"
+    result = "result.xml"
+    sol = Solution(program_file, log_file, bin_output)
