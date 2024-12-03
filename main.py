@@ -138,9 +138,52 @@ class Solution:
 
 
 class Interpreter:
-    def __int__(self, binary_path: str, result_path: str):
+    def __init__(self, binary_path: str, result_path: str):
         with open(binary_path, 'rb') as f:
             self.bin = f.read()
+        self.memory = [0] * 128
+        self.result_file = result_path
+        open(self.result_file, 'w').close()
+
+    def run(self):
+        bits = bin(int.from_bytes(self.bin))[2:]
+        bits = '0' * (48 - len(bits) % 48) + bits
+        commands = [bits[i:i+48] for i in range(0, len(bits), 48)]
+
+        for command in commands:
+            op = command[0:7]
+            if op == bin(36)[2:].rjust(7, '0'):
+                new_var = int(command[7:14], 2)
+                val = int(command[14:42], 2)
+                print(new_var)
+                self.memory[new_var] = val
+            elif op == bin(58)[2:].rjust(7, '0'):
+                new_var = int(command[7:14], 2)
+                address_c = int(command[14:21], 2)
+                print(new_var)
+                shift = int(command[21:27], 2)
+                self.memory[new_var] = self.memory[address_c + shift]
+            elif op == bin(25)[2:].rjust(7, '0'):
+                address = int(command[7:14], 2)
+                new_var = int(command[14:27], 2)
+                print(new_var)
+                self.memory[new_var] = self.memory[address]
+            elif op == bin(32)[2:].rjust(7, '0'):
+                new_var = int(command[7:14], 2)
+                address1 = int(command[14:21], 2)
+                print(new_var)
+                address2 = int(command[21:28], 2)
+                self.memory[new_var] = self.memory[address1] * self.memory[address2]
+
+        self.write_log()
+
+    def write_log(self):
+        with open(self.result_file, 'w') as f:
+            print("not null elements:", 128 - self.memory.count(0))
+            f.write("<logs>\n")
+            for i in range(len(self.memory)):
+                f.write(f"\t<{bin(i)[1:]}>{self.memory[i]}</{bin(i)[1:]}>\n")
+            f.write("</logs>")
 
 
 
@@ -150,3 +193,5 @@ if __name__ == "__main__":
     log_file = "logs.xml"
     result = "result.xml"
     sol = Solution(program_file, log_file, bin_output)
+    interpreter = Interpreter(bin_output, result)
+    interpreter.run()

@@ -1,4 +1,23 @@
-const a0 210
-move b0 a0 10
-write b0 c0
-mult d0 b0 c0
+const a0 1
+const a1 2
+const a2 3
+const a3 4
+const a4 5
+const a5 6
+const a6 7
+
+const b0 1
+const b1 2
+const b2 3
+const b3 4
+const b4 5
+const b5 6
+const b6 7
+
+mult a0 a0 b0
+mult a1 a1 b1
+mult a2 a2 b2
+mult a3 a3 b3
+mult a4 a4 b4
+mult a5 a5 b5
+mult a6 a6 b6
