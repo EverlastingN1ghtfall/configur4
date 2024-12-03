@@ -184,7 +184,7 @@ class Interpreter:
 
 
 if __name__ == "__main__":
-    mode = 0
+    mode = 1
     if mode == 0:
         parser = argparse.ArgumentParser()
         parser.add_argument('-i')
