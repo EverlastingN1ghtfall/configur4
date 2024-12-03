@@ -1,4 +1,4 @@
-from lxml import etree
+import argparse
 
 
 class Solution:
@@ -155,23 +155,19 @@ class Interpreter:
             if op == bin(36)[2:].rjust(7, '0'):
                 new_var = int(command[7:14], 2)
                 val = int(command[14:42], 2)
-                print(new_var)
                 self.memory[new_var] = val
             elif op == bin(58)[2:].rjust(7, '0'):
                 new_var = int(command[7:14], 2)
                 address_c = int(command[14:21], 2)
-                print(new_var)
                 shift = int(command[21:27], 2)
                 self.memory[new_var] = self.memory[address_c + shift]
             elif op == bin(25)[2:].rjust(7, '0'):
                 address = int(command[7:14], 2)
                 new_var = int(command[14:27], 2)
-                print(new_var)
                 self.memory[new_var] = self.memory[address]
             elif op == bin(32)[2:].rjust(7, '0'):
                 new_var = int(command[7:14], 2)
                 address1 = int(command[14:21], 2)
-                print(new_var)
                 address2 = int(command[21:28], 2)
                 self.memory[new_var] = self.memory[address1] * self.memory[address2]
 
@@ -188,10 +184,27 @@ class Interpreter:
 
 
 if __name__ == "__main__":
-    program_file = "script.txt"
-    bin_output = "assembler.bin"
-    log_file = "logs.xml"
-    result = "result.xml"
-    sol = Solution(program_file, log_file, bin_output)
-    interpreter = Interpreter(bin_output, result)
-    interpreter.run()
+    mode = 0
+    if mode == 0:
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-i')
+        parser.add_argument('-b')
+        parser.add_argument('-l')
+        parser.add_argument('-o')
+
+        args = parser.parse_args()
+        program_file = args.i
+        bin_output = args.b
+        log_file = args.l
+        result = args.o
+        sol = Solution(program_file, log_file, bin_output)
+        interpreter = Interpreter(bin_output, result)
+        interpreter.run()
+    elif mode == 1:
+        program_file = "script.txt"
+        bin_output = "assembler.bin"
+        log_file = "logs.xml"
+        result = "result.xml"
+        sol = Solution(program_file, log_file, bin_output)
+        interpreter = Interpreter(bin_output, result)
+        interpreter.run()
