@@ -64,6 +64,7 @@
 
 Интерпретатор принимает на вход двоичный файл и обрабатывает содержимое, результатом чего является файл типа .xml.
 В нём будут все значения переменных с их адресами памяти.
+Также интерпретатор выведет количество занятых ячеек памяти.
 
 Запуск производится из консоли, указываются 4 аргумента: -i (путь к файлу-скрипту исходной программы),
 -b (путь к двоичному файлу), -l (путь к файлу логов типа xml), -o (путь к файлу-результату типа xml). 
@@ -74,18 +75,19 @@
 
 Входной файл:
 
-![image](https://github.com/user-attachments/assets/44b202b3-1d2f-4634-b084-6fae29386193)
+![image](https://github.com/user-attachments/assets/e427a87b-89ca-4bd4-9618-ba65acc5c787)
 
+Файл логов:
+
+![image](https://github.com/user-attachments/assets/238e1004-6bf3-4b58-8e92-3dcd953e4b83)
 
 Выходной файл:
 
-![image](https://github.com/user-attachments/assets/7e2fc617-3b9e-43ab-b672-5c4be0e61fc0)
+![image](https://github.com/user-attachments/assets/3aa400d2-bf75-4ff7-a420-a10afe28741f)
 
 ## **Тестирование**
 
-![image](https://github.com/user-attachments/assets/606bb6c9-791f-4c3a-9e01-e5836cc9e190)
-![image](https://github.com/user-attachments/assets/93076f31-7f26-46c8-ac40-a975d65c2903)
-![image](https://github.com/user-attachments/assets/92980b4e-7f0c-45d6-9dc7-ed2b0595d899)
-![image](https://github.com/user-attachments/assets/34bdd43b-2b76-4733-8e7e-2a290b24abe6)
+![image](https://github.com/user-attachments/assets/bc4cf843-e695-482e-82d2-5c236e0f5339)
+
 
 repo url: https://github.com/EverlastingN1ghtfall/configur3
