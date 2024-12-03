@@ -9,6 +9,7 @@ class Solution:
         self.output_file: str = output_file
         self.free_address: int = -1
         self.logs: list = []
+        open(output_file, 'wb').close()
 
         self.main()
 
@@ -67,9 +68,11 @@ class Solution:
 
     def log_dump(self):
         with open(self.log_file, 'w') as f:
-            ET = etree.Element(self.log[0])
-            etree.dump(ET)
-            f.write()
+            f.write("<logs>\n")
+            for i in self.logs:
+                for j in i.keys():
+                    f.write(f"\t<{j}>{i[j]}</{j}>\n")
+            f.write("</logs>")
 
     def main(self):
         with open(self.input_file, 'r') as f:
@@ -132,6 +135,13 @@ class Solution:
                 self.output_binary(binary)
 
         self.log_dump()
+
+
+class Interpreter:
+    def __int__(self, binary_path: str, result_path: str):
+        with open(binary_path, 'rb') as f:
+            self.bin = f.read()
+
 
 
 if __name__ == "__main__":
