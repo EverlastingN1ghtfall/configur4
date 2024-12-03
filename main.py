@@ -10,8 +10,8 @@ class Solution:
         self.free_address: int = -1
         self.logs: list = []
         open(output_file, 'wb').close()
-
-        self.main()
+        with open(self.input_file, 'r') as f:
+            self.lines = f.readlines()
 
     def paginate(self, num: int, length: int) -> str:
         return "0" * (length - len(bin(num)[2:])) + bin(num)[2:]
@@ -75,9 +75,7 @@ class Solution:
             f.write("</logs>")
 
     def main(self):
-        with open(self.input_file, 'r') as f:
-            lines = f.readlines()
-        for line in lines:
+        for line in self.lines:
             if line.startswith("const"):
                 _, var, value = line.split()
 
@@ -198,6 +196,7 @@ if __name__ == "__main__":
         log_file = args.l
         result = args.o
         sol = Solution(program_file, log_file, bin_output)
+        sol.main()
         interpreter = Interpreter(bin_output, result)
         interpreter.run()
     elif mode == 1:
@@ -206,5 +205,6 @@ if __name__ == "__main__":
         log_file = "logs.xml"
         result = "result.xml"
         sol = Solution(program_file, log_file, bin_output)
+        sol.main()
         interpreter = Interpreter(bin_output, result)
         interpreter.run()

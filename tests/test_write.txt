@@ -1,0 +1,4 @@
+const a0 5
+const a1 10
+write a0 b0
+write a1 b1
