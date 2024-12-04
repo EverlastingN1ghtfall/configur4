@@ -1,5 +1,4 @@
 import argparse
-import os
 from Assembler import Assembler
 from Interpreter import Interpreter
 
@@ -30,7 +29,7 @@ if __name__ == "__main__":
         bin_output = "assembler.bin"
         log_file = "logs.xml"
         result = "result.xml"
-        sol = Solution(program_file, log_file, bin_output)
+        sol = Assembler(program_file, log_file, bin_output)
         sol.main()
         interpreter = Interpreter(bin_output, result, 10, 24)
         interpreter.run()
